@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coming Soon</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    .coming-soon {
+      text-align: center;
+      color: white;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .coming-soon h1 {
+      font-size: 70px;
+      letter-spacing: 8px;
+      text-transform: uppercase;
+      animation: glow 2s infinite alternate;
+    }
+
+    .coming-soon p {
+      margin-top: 20px;
+      font-size: 22px;
+      letter-spacing: 4px;
+      color: #ddd;
+    }
+
+    .dots {
+      display: inline-block;
+      animation: dots 1.5s infinite;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 5px #00eaff;
+      }
+      to {
+        text-shadow:
+          0 0 10px #00eaff,
+          0 0 20px #00eaff,
+          0 0 40px #00eaff;
+      }
+    }
+
+    @keyframes dots {
+      0%, 20% {
+        content: "";
+      }
+      40% {
+        opacity: 0.5;
+      }
+      60% {
+        opacity: 1;
+      }
+      80% {
+        opacity: 0.5;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .coming-soon h1 {
+        font-size: 40px;
+        letter-spacing: 4px;
+      }
+
+      .coming-soon p {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="coming-soon">
+    <h1>Coming Soon</h1>
+    <p>Our Web Application is under construction<span class="dots">...</span></p>
+  </div>
+
+</body>
+</html>

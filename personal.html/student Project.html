@@ -1,0 +1,1790 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Computer Organization Lab | Student Project</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+    <link href="../fonts.googleapis.com/css2/family=Poppins_wght@300;400;500;600;700;800&amp;display=swap.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        /* =====================================================
+           GLOBAL
+        ====================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background: #050816;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        section {
+            padding: 100px 7%;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+
+        /* =====================================================
+           ANIMATED BACKGROUND
+        ====================================================== */
+
+        .background {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(2px);
+            opacity: 0.18;
+            animation: moveCircle 10s infinite alternate ease-in-out;
+        }
+
+        .circle.one {
+            width: 300px;
+            height: 300px;
+            background: #00e5ff;
+            top: 5%;
+            left: -100px;
+        }
+
+        .circle.two {
+            width: 250px;
+            height: 250px;
+            background: #6c4cff;
+            right: -100px;
+            top: 35%;
+            animation-delay: 2s;
+        }
+
+        .circle.three {
+            width: 200px;
+            height: 200px;
+            background: #00ff95;
+            left: 35%;
+            bottom: -100px;
+            animation-delay: 4s;
+        }
+
+        @keyframes moveCircle {
+
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            100% {
+                transform: translate(80px, -60px) scale(1.15);
+            }
+
+        }
+
+
+        /* =====================================================
+           NAVBAR
+        ====================================================== */
+
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+
+            background: rgba(5, 8, 22, 0.86);
+            backdrop-filter: blur(15px);
+
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        nav {
+            width: 90%;
+            max-width: 1200px;
+            height: 72px;
+            margin: auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+        .logo span {
+            color: #00e5ff;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 26px;
+        }
+
+        .nav-links a {
+            font-size: 13px;
+            color: #d3d9e4;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #00e5ff;
+        }
+
+        .menu-btn {
+            display: none;
+            color: #00e5ff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+
+        /* =====================================================
+           HERO
+        ====================================================== */
+
+        .hero {
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            padding-top: 100px;
+        }
+
+        .hero-content {
+            max-width: 950px;
+        }
+
+        .lab-badge {
+            display: inline-block;
+
+            padding: 8px 18px;
+
+            border-radius: 30px;
+
+            border: 1px solid rgba(0,229,255,0.3);
+
+            color: #00e5ff;
+
+            background: rgba(0,229,255,0.06);
+
+            font-size: 12px;
+
+            margin-bottom: 22px;
+
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 7vw, 75px);
+            line-height: 1.05;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #00e5ff;
+        }
+
+        .hero h2 {
+            font-size: clamp(20px, 3vw, 30px);
+            color: #b5bdcc;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            max-width: 750px;
+            margin: auto;
+
+            color: #8e99ac;
+
+            line-height: 1.9;
+            font-size: 15px;
+        }
+
+        .hero-buttons {
+            margin-top: 32px;
+
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 13px 23px;
+
+            border-radius: 30px;
+
+            background: #00e5ff;
+            color: #031018;
+
+            font-weight: 700;
+
+            font-size: 13px;
+
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,229,255,0.2);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #00e5ff;
+            border: 1px solid #00e5ff;
+        }
+
+
+        /* =====================================================
+           SECTION TITLES
+        ====================================================== */
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 55px;
+        }
+
+        .section-title h2 {
+            font-size: 42px;
+        }
+
+        .section-title h2 span {
+            color: #00e5ff;
+        }
+
+        .section-title p {
+            color: #7f8a9d;
+            margin-top: 8px;
+            font-size: 14px;
+        }
+
+
+        /* =====================================================
+           ABOUT LAB
+        ====================================================== */
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 35px;
+        }
+
+        .about-card {
+            padding: 30px;
+
+            border-radius: 20px;
+
+            background: rgba(255,255,255,0.03);
+
+            border: 1px solid rgba(255,255,255,0.08);
+
+            transition: 0.4s;
+        }
+
+        .about-card:hover {
+            transform: translateY(-8px);
+            border-color: #00e5ff;
+        }
+
+        .about-card i {
+            color: #00e5ff;
+            font-size: 35px;
+            margin-bottom: 18px;
+        }
+
+        .about-card h3 {
+            margin-bottom: 12px;
+        }
+
+        .about-card p {
+            color: #949fb1;
+            line-height: 1.8;
+            font-size: 14px;
+        }
+
+
+        /* =====================================================
+           LAB OBJECTIVES
+        ====================================================== */
+
+        .objectives {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .objective-card {
+            padding: 27px 20px;
+
+            text-align: center;
+
+            background: rgba(255,255,255,0.03);
+
+            border-radius: 18px;
+
+            border: 1px solid rgba(255,255,255,0.07);
+
+            transition: 0.4s;
+        }
+
+        .objective-card:hover {
+            transform: translateY(-8px);
+            border-color: #00e5ff;
+        }
+
+        .objective-card i {
+            font-size: 34px;
+            color: #00e5ff;
+            margin-bottom: 15px;
+        }
+
+        .objective-card h3 {
+            font-size: 17px;
+            margin-bottom: 8px;
+        }
+
+        .objective-card p {
+            color: #8792a5;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+
+        /* =====================================================
+           EXPERIMENTS
+        ====================================================== */
+
+        .experiment-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(280px, 1fr));
+
+            gap: 22px;
+        }
+
+        .experiment-card {
+            position: relative;
+
+            padding: 28px;
+
+            border-radius: 20px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #101b32,
+                    #07101f
+                );
+
+            border: 1px solid rgba(255,255,255,0.08);
+
+            overflow: hidden;
+
+            transition: 0.4s;
+        }
+
+        .experiment-card:hover {
+            transform: translateY(-10px);
+            border-color: #00e5ff;
+
+            box-shadow:
+                0 20px 50px rgba(0,229,255,0.08);
+        }
+
+        .experiment-number {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+
+            font-size: 55px;
+            font-weight: 800;
+
+            color: rgba(0,229,255,0.05);
+        }
+
+        .experiment-icon {
+            width: 60px;
+            height: 60px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 15px;
+
+            background: rgba(0,229,255,0.08);
+
+            color: #00e5ff;
+
+            font-size: 26px;
+
+            margin-bottom: 18px;
+        }
+
+        .experiment-card h3 {
+            color: #00e5ff;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .experiment-card p {
+            color: #929daf;
+            line-height: 1.8;
+            font-size: 13px;
+        }
+
+        .experiment-tag {
+            display: inline-block;
+
+            margin-top: 15px;
+
+            padding: 5px 9px;
+
+            border-radius: 20px;
+
+            color: #8795aa;
+
+            background: rgba(255,255,255,0.05);
+
+            font-size: 10px;
+        }
+
+
+        /* =====================================================
+           COMPONENTS
+        ====================================================== */
+
+        .component-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(170px, 1fr));
+
+            gap: 18px;
+        }
+
+        .component {
+            padding: 25px 15px;
+
+            text-align: center;
+
+            background: rgba(255,255,255,0.03);
+
+            border: 1px solid rgba(255,255,255,0.07);
+
+            border-radius: 16px;
+
+            transition: 0.4s;
+        }
+
+        .component:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: #00e5ff;
+        }
+
+        .component i {
+            color: #00e5ff;
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .component h3 {
+            font-size: 15px;
+        }
+
+
+        /* =====================================================
+           LEARNING OUTCOMES
+        ====================================================== */
+
+        .outcomes {
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .outcome {
+            display: flex;
+            gap: 15px;
+
+            padding: 18px 20px;
+
+            margin-bottom: 12px;
+
+            border-radius: 12px;
+
+            background: rgba(255,255,255,0.03);
+
+            border: 1px solid rgba(255,255,255,0.07);
+
+            transition: 0.3s;
+        }
+
+        .outcome:hover {
+            border-color: #00e5ff;
+        }
+
+        .outcome i {
+            color: #00e5ff;
+            margin-top: 4px;
+        }
+
+        .outcome p {
+            color: #9aa4b6;
+            font-size: 14px;
+        }
+
+
+        /* =====================================================
+           STUDENT DETAILS
+        ====================================================== */
+
+        .student-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 18px;
+        }
+
+        .student-card {
+            padding: 25px 15px;
+
+            text-align: center;
+
+            border-radius: 18px;
+
+            background: rgba(255,255,255,0.03);
+
+            border: 1px solid rgba(255,255,255,0.07);
+
+            transition: 0.4s;
+        }
+
+        .student-card:hover {
+            transform: translateY(-8px);
+            border-color: #00e5ff;
+        }
+
+        .student-card i {
+            color: #00e5ff;
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        .student-card span {
+            display: block;
+            color: #7f8a9c;
+            font-size: 12px;
+        }
+
+        .student-card strong {
+            display: block;
+            margin-top: 5px;
+        }
+
+
+        /* =====================================================
+           CONTACT
+        ====================================================== */
+
+        .contact-box {
+            max-width: 850px;
+            margin: auto;
+
+            padding: 35px;
+
+            text-align: center;
+
+            border-radius: 22px;
+
+            background: rgba(255,255,255,0.03);
+
+            border: 1px solid rgba(255,255,255,0.07);
+        }
+
+        .contact-box p {
+            color: #909bad;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ====================================================== */
+
+        footer {
+            text-align: center;
+
+            padding: 25px;
+
+            color: #707c90;
+
+            border-top:
+                1px solid rgba(255,255,255,0.07);
+        }
+
+        footer span {
+            color: #00e5ff;
+        }
+
+
+        /* =====================================================
+           ANIMATIONS
+        ====================================================== */
+
+        @keyframes float {
+
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+
+        @media(max-width: 900px) {
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .student-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .nav-links {
+                position: absolute;
+
+                top: 72px;
+                left: -100%;
+
+                width: 100%;
+
+                flex-direction: column;
+
+                text-align: center;
+
+                background: #070c1d;
+
+                padding: 30px;
+
+                transition: 0.4s;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+        }
+
+
+        @media(max-width: 600px) {
+
+            section {
+                padding: 80px 5%;
+            }
+
+            .student-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title h2 {
+                font-size: 32px;
+            }
+
+            .hero h1 {
+                font-size: 45px;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         BACKGROUND
+    ====================================================== -->
+
+    <div class="background">
+
+        <div class="circle one"></div>
+
+        <div class="circle two"></div>
+
+        <div class="circle three"></div>
+
+    </div>
+
+
+    <!-- =====================================================
+         NAVBAR
+    ====================================================== -->
+
+    <header>
+
+        <nav>
+
+            <a href="index.html" class="logo">
+                CO<span>A</span> Lab
+            </a>
+
+
+            <div class="menu-btn" id="menuBtn">
+
+                <i class="fas fa-bars"></i>
+
+            </div>
+
+
+            <ul class="nav-links" id="navLinks">
+
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+
+                <li>
+                    <a href="index.html">About Lab</a>
+                </li>
+
+                <li>
+                    <a href="index.html">Experiments</a>
+                </li>
+
+                <li>
+                    <a href="index.html">Components</a>
+                </li>
+
+                <li>
+                    <a href="index.html">Outcomes</a>
+                </li>
+
+                <li>
+                    <a href="index.html">Student</a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <div class="lab-badge">
+
+                <i class="fas fa-microchip"></i>
+
+                COMPUTER ORGANIZATION &amp; ARCHITECTURE LAB
+
+            </div>
+
+
+            <h1>
+
+                Computer
+                <span>Organization</span>
+                Lab
+
+            </h1>
+
+
+            <h2>
+                Shivam's Project 
+            </h2>
+
+
+            <p>
+
+                A student project website dedicated to studying
+                computer organization, CPU architecture, memory,
+                digital logic, ALU operations, registers,
+                instruction processing and basic computer
+                architecture concepts.
+
+            </p>
+
+
+            <div class="hero-buttons">
+
+                <a href="index.html" class="btn">
+
+                    <i class="fas fa-flask"></i>
+
+                    View Experiments
+
+                </a>
+
+
+                <a href="index.html" class="btn btn-outline">
+
+                    <i class="fas fa-book"></i>
+
+                    Learn More
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         ABOUT LAB
+    ====================================================== -->
+
+    <section id="about">
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <h2>
+                    About <span>The Lab</span>
+                </h2>
+
+                <p>
+                    Understanding the internal organization of computers
+                </p>
+
+            </div>
+
+
+            <div class="about-grid">
+
+
+                <div class="about-card">
+
+                    <i class="fas fa-microchip"></i>
+
+                    <h3>
+                        What is Computer Organization?
+                    </h3>
+
+                    <p>
+
+                        Computer organization deals with the
+                        operational structure of a computer system,
+                        including the CPU, registers, memory,
+                        buses, arithmetic logic unit and input/output
+                        systems.
+
+                    </p>
+
+                </div>
+
+
+                <div class="about-card">
+
+                    <i class="fas fa-gears"></i>
+
+                    <h3>
+                        Purpose of the Lab
+                    </h3>
+
+                    <p>
+
+                        The lab provides practical understanding
+                        of digital components, logic circuits,
+                        memory operations, CPU data paths and
+                        basic instruction execution.
+
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         OBJECTIVES
+    ====================================================== -->
+
+    <section>
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <h2>
+                    Lab <span>Objectives</span>
+                </h2>
+
+                <p>
+                    What students learn in the laboratory
+                </p>
+
+            </div>
+
+
+            <div class="objectives">
+
+
+                <div class="objective-card">
+
+                    <i class="fas fa-microchip"></i>
+
+                    <h3>
+                        CPU Organization
+                    </h3>
+
+                    <p>
+                        Understand processor components,
+                        registers and data paths.
+                    </p>
+
+                </div>
+
+
+                <div class="objective-card">
+
+                    <i class="fas fa-memory"></i>
+
+                    <h3>
+                        Memory
+                    </h3>
+
+                    <p>
+                        Study RAM, cache and memory
+                        organization.
+                    </p>
+
+                </div>
+
+
+                <div class="objective-card">
+
+                    <i class="fas fa-calculator"></i>
+
+                    <h3>
+                        ALU
+                    </h3>
+
+                    <p>
+                        Understand arithmetic and
+                        logical operations.
+                    </p>
+
+                </div>
+
+
+                <div class="objective-card">
+
+                    <i class="fas fa-project-diagram"></i>
+
+                    <h3>
+                        Digital Logic
+                    </h3>
+
+                    <p>
+                        Study gates, adders, multiplexers
+                        and digital circuits.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         EXPERIMENTS
+    ====================================================== -->
+
+    <section id="experiments">
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <h2>
+                    Lab <span>Experiments</span>
+                </h2>
+
+                <p>
+                    Important Computer Organization laboratory topics
+                </p>
+
+            </div>
+
+
+            <div class="experiment-grid">
+
+
+                <!-- Experiment 1 -->
+
+                <div class="experiment-card">
+
+                    <div class="experiment-number">
+                        01
+                    </div>
+
+                    <div class="experiment-icon">
+
+                        <i class="fas fa-table"></i>
+
+                    </div>
+
+                    <h3>
+                        Logic Gate Verification
+                    </h3>
+
+                    <p>
+
+                        Verify the truth tables of basic
+                        logic gates including AND, OR, NOT,
+                        NAND, NOR, XOR and XNOR.
+
+                    </p>
+
+                    <span class="experiment-tag">
+                        Digital Logic
+                    </span>
+
+                </div>
+
+
+                <!-- Experiment 2 -->
+
+                <div class="experiment-card">
+
+                    <div class="experiment-number">
+                        02
+                    </div>
+
+                    <div class="experiment-icon">
+
+                        <i class="fas fa-code-branch"></i>
+
+                    </div>
+
+                    <h3>
+                        Multiplexer &amp; Decoder
+                    </h3>
+
+                    <p>
+
+                        Study the operation of multiplexers,
+                        demultiplexers, encoders and decoders
+                        using digital logic.
+
+                    </p>
+
+                    <span class="experiment-tag">
+                        Combinational Circuit
+                    </span>
+
+                </div>
+
+
+                <!-- Experiment 3 -->
+
+                <div class="experiment-card">
+
+                    <div class="experiment-number">
+                        03
+                    </div>
+
+                    <div class="experiment-icon">
+
+                        <i class="fas fa-plus"></i>
+
+                    </div>
+
+                    <h3>
+                        Adder &amp; Subtractor
+                    </h3>
+
+                    <p>
+
+                        Design and understand half adder,
+                        full adder, half subtractor and
+                        full subtractor circuits.
+
+                    </p>
+
+                    <span class="experiment-tag">
+                        Arithmetic Circuit
+                    </span>
+
+                </div>
+
+
+                <!-- Experiment 4 -->
+
+                <div class="experiment-card">
+
+                    <div class="experiment-number">
+                        04
+                    </div>
+
+                    <div class="experiment-icon">
+
+                        <i class="fas fa-calculator"></i>
+
+                    </div>
+
+                    <h3>
+                        ALU Operations
+                    </h3>
+
+                    <p>
+
+                        Study arithmetic and logical operations
+                        performed by an Arithmetic Logic Unit.
+
+                    </p>
+
+                    <span class="experiment-tag">
+                        CPU Organization
+                    </span>
+
+                </div>
+
+
+                <!-- Experiment 5 -->
+
+                <div class="experiment-card">
+
+                    <div class="experiment-number">
+                        05
+                    </div>
+
+                    <div class="experiment-icon">
+
+                        <i class="fas fa-memory"></i>
+
+                    </div>
+
+                    <h3>
+                        RAM Read / Write
+                    </h3>
+
+                    <p>
+
+                        Understand memory read and write
+                        operations and basic RAM organization.
+
+                    </p>
+
+                    <span class="experiment-tag">
+                        Memory System
+                    </span>
+
+                </div>
+
+
+                <!-- Experiment 6 -->
+
+                <div class="experiment-card">
+
+                    <div class="experiment-number">
+                        06
+                    </div>
+
+                    <div class="experiment-icon">
+
+                        <i class="fas fa-microchip"></i>
+
+                    </div>
+
+                    <h3>
+                        CPU Data Path
+                    </h3>
+
+                    <p>
+
+                        Study how data moves between registers,
+                        ALU, memory and other processor units.
+
+                    </p>
+
+                    <span class="experiment-tag">
+                        Processor Architecture
+                    </span>
+
+                </div>
+
+
+                <!-- Experiment 7 -->
+
+                <div class="experiment-card">
+
+                    <div class="experiment-number">
+                        07
+                    </div>
+
+                    <div class="experiment-icon">
+
+                        <i class="fas fa-bolt"></i>
+
+                    </div>
+
+                    <h3>
+                        Adders &amp; Carry
+                    </h3>
+
+                    <p>
+
+                        Understand ripple carry and carry
+                        look-ahead adder concepts.
+
+                    </p>
+
+                    <span class="experiment-tag">
+                        Arithmetic Logic
+                    </span>
+
+                </div>
+
+
+                <!-- Experiment 8 -->
+
+                <div class="experiment-card">
+
+                    <div class="experiment-number">
+                        08
+                    </div>
+
+                    <div class="experiment-icon">
+
+                        <i class="fas fa-memory"></i>
+
+                    </div>
+
+                    <h3>
+                        Memory Organization
+                    </h3>
+
+                    <p>
+
+                        Study memory hierarchy, cache memory,
+                        registers and main memory organization.
+
+                    </p>
+
+                    <span class="experiment-tag">
+                        Memory Architecture
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         COMPONENTS
+    ====================================================== -->
+
+    <section id="components">
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <h2>
+                    Important <span>Components</span>
+                </h2>
+
+                <p>
+                    Components studied in Computer Organization
+                </p>
+
+            </div>
+
+
+            <div class="component-grid">
+
+
+                <div class="component">
+
+                    <i class="fas fa-microchip"></i>
+
+                    <h3>CPU</h3>
+
+                </div>
+
+
+                <div class="component">
+
+                    <i class="fas fa-calculator"></i>
+
+                    <h3>ALU</h3>
+
+                </div>
+
+
+                <div class="component">
+
+                    <i class="fas fa-memory"></i>
+
+                    <h3>RAM</h3>
+
+                </div>
+
+
+                <div class="component">
+
+                    <i class="fas fa-layer-group"></i>
+
+                    <h3>Cache</h3>
+
+                </div>
+
+
+                <div class="component">
+
+                    <i class="fas fa-toggle-on"></i>
+
+                    <h3>Registers</h3>
+
+                </div>
+
+
+                <div class="component">
+
+                    <i class="fas fa-project-diagram"></i>
+
+                    <h3>Multiplexer</h3>
+
+                </div>
+
+
+                <div class="component">
+
+                    <i class="fas fa-random"></i>
+
+                    <h3>Encoder</h3>
+
+                </div>
+
+
+                <div class="component">
+
+                    <i class="fas fa-sitemap"></i>
+
+                    <h3>Decoder</h3>
+
+                </div>
+
+
+                <div class="component">
+
+                    <i class="fas fa-network-wired"></i>
+
+                    <h3>Data Bus</h3>
+
+                </div>
+
+
+                <div class="component">
+
+                    <i class="fas fa-cogs"></i>
+
+                    <h3>Control Unit</h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         LEARNING OUTCOMES
+    ====================================================== -->
+
+    <section id="outcomes">
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <h2>
+                    Learning <span>Outcomes</span>
+                </h2>
+
+                <p>
+                    Skills developed through the laboratory
+                </p>
+
+            </div>
+
+
+            <div class="outcomes">
+
+
+                <div class="outcome">
+
+                    <i class="fas fa-check-circle"></i>
+
+                    <p>
+                        Understand the fundamental organization
+                        and operation of a computer system.
+                    </p>
+
+                </div>
+
+
+                <div class="outcome">
+
+                    <i class="fas fa-check-circle"></i>
+
+                    <p>
+                        Explain the role of CPU, ALU, registers,
+                        memory and control unit.
+                    </p>
+
+                </div>
+
+
+                <div class="outcome">
+
+                    <i class="fas fa-check-circle"></i>
+
+                    <p>
+                        Design and analyze basic digital
+                        arithmetic and logic circuits.
+                    </p>
+
+                </div>
+
+
+                <div class="outcome">
+
+                    <i class="fas fa-check-circle"></i>
+
+                    <p>
+                        Understand memory hierarchy and
+                        data transfer inside a computer.
+                    </p>
+
+                </div>
+
+
+                <div class="outcome">
+
+                    <i class="fas fa-check-circle"></i>
+
+                    <p>
+                        Develop practical knowledge of
+                        processor and computer architecture.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         STUDENT INFORMATION
+    ====================================================== -->
+
+    <section id="student">
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <h2>
+                    Shivam<span>Kumar</span>
+                </h2>
+
+                <p>
+                    Computer Organization Lab 
+                </p>
+
+            </div>
+
+
+            <div class="student-grid">
+
+
+                <div class="student-card">
+
+                    <i class="fas fa-user"></i>
+
+                    <span>Student Name</span>
+
+                    <strong>
+                        Shivam Kumar
+                    </strong>
+
+                </div>
+
+
+                <div class="student-card">
+
+                    <i class="fas fa-graduation-cap"></i>
+
+                    <span>Course</span>
+
+                    <strong>
+                        B.Tech CSE
+                    </strong>
+
+                </div>
+
+
+                <div class="student-card">
+
+                    <i class="fas fa-book"></i>
+
+                    <span>Subject</span>
+
+                    <strong>
+                        COM. ORG. Lab
+                    </strong>
+
+                </div>
+
+
+                <div class="student-card">
+
+                    <i class="fas fa-calendar"></i>
+
+                    <span>Academic Year</span>
+
+                    <strong>
+                        2025 - 2029
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         CONTACT
+    ====================================================== -->
+
+    <section>
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <h2>
+                    Project <span>Contact</span>
+                </h2>
+
+                <p>
+                    Computer Organization Lab Project
+                </p>
+
+            </div>
+
+
+            <div class="contact-box">
+
+                <p>
+
+                    This website is created as a college student
+                    project for learning and presenting Computer
+                    Organization &amp; Architecture laboratory topics.
+
+                </p>
+
+
+                <div class="contact-buttons">
+
+                    <a class="btn" <a="" href="ss2547824@gmail.com">
+
+                        <i class="fas fa-envelope"></i>
+
+                        Email
+
+                    </a>
+
+
+                    <a class="btn btn-outline" href="index.html">
+
+                        <i class="fas fa-arrow-up"></i>
+
+                        Back to Top
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer>
+
+        <p>
+
+            © 2026
+            <span>Shivam Kumar</span>
+            | Computer Organization &amp; Architecture Lab
+
+        </p>
+
+    </footer>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+        const menuBtn =
+            document.getElementById("menuBtn");
+
+        const navLinks =
+            document.getElementById("navLinks");
+
+
+        /* MOBILE MENU */
+
+        menuBtn.addEventListener("click", function () {
+
+            navLinks.classList.toggle("active");
+
+            const icon =
+                menuBtn.querySelector("i");
+
+            if (navLinks.classList.contains("active")) {
+
+                icon.classList.remove("fa-bars");
+                icon.classList.add("fa-xmark");
+
+            } else {
+
+                icon.classList.remove("fa-xmark");
+                icon.classList.add("fa-bars");
+
+            }
+
+        });
+
+
+        /* CLOSE MENU */
+
+        document.querySelectorAll(".nav-links a")
+            .forEach(link => {
+
+                link.addEventListener("click", function () {
+
+                    navLinks.classList.remove("active");
+
+                    menuBtn.querySelector("i")
+                        .classList.remove("fa-xmark");
+
+                    menuBtn.querySelector("i")
+                        .classList.add("fa-bars");
+
+                });
+
+            });
+
+    </script>
+
+
+<script async="" src=".netlify/scripts/hud/variant=public" data-nf-variant="public" data-netlify-site-id="ffa2d2f4-d4f7-4623-9070-d7ded70631bc" data-app-host="app.netlify.com"></script>
+</body></html>
